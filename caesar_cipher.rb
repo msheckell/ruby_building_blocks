@@ -1,20 +1,29 @@
 
-	puts "Enter a phrase you would like to have encrypted"
-	phrase = gets.chomp
-	letters = phrase.split("")
+puts "Enter a phrase you would like to have encrypted"
+phrase = gets.chomp
+decoded = ""
 
-	# puts "Now enter a number 1-26"
-	# number = gets.chomp
+puts "Now enter a number 1-26"
+number = gets.chomp.to_i
 
-	letters.each do |letter|
-		letter = letter.ord
-		letter += 5
-		if letter > 90
-			letter -= 26
+lowercase = ('a'..'z').to_a
+uppercase = ('A'..'Z').to_a
+
+	phrase.each_char do |letter|
+		if uppercase.include?(letter)
+			letter = letter.ord
+			letter += number
+			if letter > 90
+				letter -= 26
+			end
+		elsif lowercase.include?(letter)
+			letter = letter.ord
+			letter += number
+			if letter > 122
+				letter -= 26
+			end
 		end
-		letters << letter.chr
-		puts letter
+		decoded << letter.chr
 	end
 
-
-puts letters.join("")
+puts decoded
